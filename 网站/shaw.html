@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFIDENTIAL | SAMEEN SHAW</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="profile-root">
+    <!-- 全局背景 -->
+    <div class="bg-base"></div>
+    <div class="bg-circuit"></div>
+
+    <!-- 顶部系统状态栏 -->
+    <div class="system-status">
+        <div class="status-left">
+            <span class="back-btn" onclick="window.location.href='index.html'">BACK TO MONITOR</span>
+            <i class="fas fa-server"></i> THE MACHINE v4.8.2
+            <span><i class="fas fa-network-wired"></i> NODES: 2,147,483</span>
+            <span><i class="fas fa-microchip"></i> LOAD: 82%</span>
+        </div>
+        <div class="status-right">
+            <span><i class="fas fa-database"></i> PROCESS: 3.7TB/s</span>
+            <span class="time"></span>
+        </div>
+    </div>
+
+    <!-- NYPD悬浮侧边栏（匹配Shaw身份：前ISIA特工） -->
+    <div class="nypd-sidebar" id="nypdSidebar">
+        <div class="sidebar-title">ISIA/GOVERNMENT DATA [SHAW'S FILES]</div>
+        <div class="nypd-section">
+            <h4>SHAW'S OPERATIONAL STATUS</h4>
+            <p>ALIGNMENT: MACHINE | CURRENT MISSION: PROTECT FINCH/ROOT</p>
+            <p>COMBAT READINESS: 100% | WEAPONS: 9MM, SNIPER RIFLE, TASER</p>
+            <p>MEDICAL STATUS: CLEAR | LAST INJURY: 2 WEEKS AGO (ARM WOUND)</p>
+            <p>OPERATIONAL AREA: NYC WIDE | PRIMARY TARGET: SIFTER AGENTS</p>
+        </div>
+        <div class="nypd-section">
+            <h4>ACTIVE MISSIONS (SHAW)</h4>
+            <p>MISSION#007: ELIMINATE SIFTER AGENT (TARGET: EAST VILLAGE)</p>
+            <p>MISSION#008: EXTRACT WITNESS (WEST BLVD) | STATUS: COMPLETE</p>
+            <p>MISSION#009: PROTECT ROOT DURING HACK (5TH AVE) | STATUS: ACTIVE</p>
+            <p>MISSION#010: INFILTRATE GOVERNMENT SERVERS | STATUS: PENDING</p>
+        </div>
+        <div class="nypd-section">
+            <h4>COMBAT STATISTICS</h4>
+            <p>ENGAGEMENTS TODAY: 3 | HOSTILES NEUTRALIZED: 5</p>
+            <p>WEAPON ACCURACY: 94% | CLOSE QUARTERS: 98% SUCCESS</p>
+            <p>EVASION RATE: 89% | SURVIVAL RATE (MISSIONS): 100%</p>
+            <p>RESPONSE TIME: 12 SECONDS (TO MACHINE ALERTS)</p>
+        </div>
+        <div class="nypd-section">
+            <h4>ENEMY ALERTS (SHAW)</h4>
+            <p>SIFTER AGENT (CODENAME: EAGLE): LAST SEEN: JFK AIRPORT</p>
+            <p>GOVERNMENT TASK FORCE: 12 AGENTS | TARGET: SHAW/ROOT</p>
+            <p>PRIVATE CONTRACTORS: HIRED TO TRACK MACHINE ASSETS</p>
+            <p>FORMER ISIA TEAM: 3 MEMBERS | STATUS: HUNTING SHAW</p>
+        </div>
+        <div class="nypd-section">
+            <h4>RESOURCE STATUS (SHAW)</h4>
+            <p>VEHICLES: STOLEN SUV (PLATE: NY-789-XYZ) | FUEL: FULL</p>
+            <p>WEAPONS: AMMO 80% | EXPLOSIVES: 2 GRENADES, 1 C4 CHARGE</p>
+            <p>MED KIT: FULL | COMM EQUIP: MACHINE LINK (ACTIVE)</p>
+        </div>
+    </div>
+
+    <!-- 个人机密档案主体（统一五五分布局） -->
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- 档案标题 -->
+            <div class="profile-title">
+                <h1>SAMEEN SHAW</h1>
+                <p>CONFIDENTIAL - LEVEL 8 ACCESS REQUIRED (MACHINE ONLY)</p>
+            </div>
+
+            <!-- 左侧基础信息 -->
+            <div class="profile-basic">
+                <div class="photo-box">
+                    <img src="img/shaw.jpg" alt="Sameen Shaw">
+                </div>
+                <div class="safety-level">
+                    <p class="level-text">SAFETY LEVEL</p>
+                    <p class="level-value">HIGH RISK</p>
+                </div>
+                <div class="basic-info">
+                    <p><span class="label">CODENAME:</span> <span class="value">SHAW</span></p>
+                    <p><span class="label">STATUS:</span> <span class="value">EX-ISIA AGENT, MACHINE OPERATIVE</span></p>
+                    <p><span class="label">AGE:</span> <span class="value">38</span></p>
+                    <p><span class="label">SKILLS:</span> <span class="value">COMBAT, SNIPER, TACTICAL, WEAPONS EXPERT</span></p>
+                    <p><span class="label">CURRENT LOC:</span> <span class="value current-location">5th Ave</span></p>
+                </div>
+            </div>
+
+            <!-- 右侧任务监控（五五列） -->
+            <div class="profile-task">
+                <!-- 左列：地图 + Active Case -->
+                <div class="task-left">
+                    <div class="map-box">
+                        <img src="img/ny-map.png" alt="New York Map (5th Ave)">
+                        <div class="location-marker">
+                            <div class="location-text">5th Ave</div>
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <h3>ACTIVE CASE #009</h3>
+                        <p class="case-item"><span class="label">CASE ID:</span> <span class="value">MACHINE-009-2026</span></p>
+                        <p class="case-item"><span class="label">REASON:</span> <span class="value">PROTECT ROOT, NEUTRALIZE HOSTILES, COMBAT SUPPORT</span></p>
+                        <p class="case-item"><span class="label">RELATIONSHIP:</span> <span class="value">SHAW → MACHINE, ROOT → PROTECTEE</span></p>
+                        <p class="case-item"><span class="label">TEAM ROLE:</span> <span class="value">COMBAT, TACTICAL, FIELD OPERATIVE</span></p>
+                    </div>
+                </div>
+
+                <!-- 右列：System Logs -->
+                <div class="task-right">
+                    <div class="log-scroll">
+                        <h3>SYSTEM LOGS [REAL-TIME]</h3>
+                        <div class="log-content">
+                            <p><span class="log-time">11:35:05</span> COMBAT - NEUTRALIZED 2 HOSTILES NEAR 5TH AVE</p>
+                            <p><span class="log-time">11:36:22</span> TACTICAL - SETTING UP SNIPER POSITION ON 5TH AVE ROOFTOP</p>
+                            <p><span class="log-time">11:37:18</span> PROTECT - MONITORING ROOT DURING CAMERA HACK</p>
+                            <p><span class="log-time">11:38:30</span> MACHINE - RECEIVED ALERT: SIFTER AGENTS APPROACHING</p>
+                            <p><span class="log-time">11:39:02</span> WEAPONS - RELOADING 9MM, CHECKING SNIPER RIFLE SCOPE</p>
+                            <p><span class="log-time">11:40:15</span> COMM - RADIO CHECK WITH ROOT: HACK PROGRESS 90%</p>
+                            <p><span class="log-time">11:41:08</span> EVASION - MOVING TO SECONDARY POSITION (12TH ST)</p>
+                            <p><span class="log-time">11:42:20</span> HOSTILE - DETECTED 3 SIFTER AGENTS: EAST VILLAGE</p>
+                            <p><span class="log-time">11:43:12</span> MACHINE - ALERTED: HOSTILE SNIPER ON 5TH AVE ROOFTOP</p>
+                            <p><span class="log-time">11:44:05</span> COMBAT - ELIMINATED HOSTILE SNIPER (HEADSHOT, 800M)</p>
+                            <p><span class="log-time">11:45:18</span> EVAC - PREPARING VEHICLE FOR ROOT EXTRACTION</p>
+                            <p><span class="log-time">11:46:30</span> MACHINE - CONFIRMED: ROOT SAFE, HOSTILES CLEARED</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部滚动播报 -->
+    <div class="news-ticker">
+        <div class="ticker-wrapper">
+            <div class="ticker-content">
+                <span class="member-link" onclick="window.location.href='reese.html'">REESE: 5TH AVE, MONITORING TARGET 01 | </span>
+                <span class="member-link" onclick="window.location.href='finch.html'">FINCH: PUBLIC LIBRARY, ANALYZING CASE DATA | </span>
+                <span>ALERT: MEDIUM THREAT TARGET 04 DETECTED NEAR WEST BLVD | </span>
+                <span class="member-link" onclick="window.location.href='root.html'">ROOT: HACKING NYC CAMERA NETWORK - ACCESS GRANTED | </span>
+                <span class="member-link" onclick="window.location.href='shaw.html'">SHAW: 5TH AVE, PROTECTING ROOT - HOSTILES NEUTRALIZED | </span>
+            </div>
+            <div class="ticker-content">
+                <span class="member-link" onclick="window.location.href='reese.html'">REESE: 5TH AVE, MONITORING TARGET 01 | </span>
+                <span class="member-link" onclick="window.location.href='finch.html'">FINCH: PUBLIC LIBRARY, ANALYZING CASE DATA | </span>
+                <span>ALERT: MEDIUM THREAT TARGET 04 DETECTED NEAR WEST BLVD | </span>
+                <span class="member-link" onclick="window.location.href='root.html'">ROOT: HACKING NYC CAMERA NETWORK - ACCESS GRANTED | </span>
+                <span class="member-link" onclick="window.location.href='shaw.html'">SHAW: 5TH AVE, PROTECTING ROOT - HOSTILES NEUTRALIZED | </span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
