@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFIDENTIAL | JOHN REESE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="profile-root">
+    <!-- 全局背景 -->
+    <div class="bg-base"></div>
+    <div class="bg-circuit"></div>
+  <!-- 顶部系统状态栏：保留结构，仅文字适配Reese场景 -->
+    <div class="system-status">
+        <div class="status-left">
+            <span class="back-btn" onclick="window.location.href='index.html'">BACK TO MONITOR</span>
+            <i class="fas fa-server"></i> THE MACHINE v4.8.2
+            <span><i class="fas fa-network-wired"></i> NODES: 2,147,483</span>
+            <span><i class="fas fa-microchip"></i> LOAD: 89%</span>
+        </div>
+        <div class="status-right">
+            <span><i class="fas fa-database"></i> PROCESS: 4.2TB/s</span>
+            <span class="time"></span>
+        </div>
+    </div>
+
+ <!-- Reese专属侧边栏 (前CIA/无固定身份版) -->
+<div class="nypd-sidebar" id="nypdSidebar">
+    <!-- 标题：替换为Reese的CIA涉密档案标识 -->
+    <div class="sidebar-title">CIA FILES [REDACTED]</div>
+    <div class="nypd-section">
+        <h4>REESE STATUS (NOMAD OPERATIVE)</h4>
+        <!-- Reese的核心状态：无固定班次、伪装身份、行动区域 -->
+        <p>OPERATIONAL SHIFT: 24/7 | ACTIVE: YES (UNDERCOVER)</p>
+        <p>ALIASES: HAROLD WREN, JOHN ROONEY, "MAN IN THE SUIT" | ALL ACTIVE</p>
+        <p>OP AREA: MANHATTAN (ALL BOROS) | PRIMARY BEAT: NOMADIC</p>
+        <p>ASSIGNMENT: PROTECTION DETAIL (THE MACHINE TARGETS) | PRIORITY: CRITICAL</p>
+    </div>
+    <div class="nypd-section">
+        <h4>REESE'S ACTIVE OPERATIONS</h4>
+        <!-- Reese的行动：保护目标、规避NYPD、打击黑帮 -->
+        <p>OP#001: PROTECT TARGET 08 (CORPORATE WHISTLEBLOWER) | STATUS: IN PROGRESS</p>
+        <p>OP#002: COUNTER SURVEILLANCE (NYPD 8TH PRECINCT) | STATUS: ACTIVE</p>
+        <p>OP#003: GANG DISRUPTION (BROOKLYN DRUG RING) | STATUS: RESOLVED</p>
+        <p>OP#004: MEET WITH FINCH (PUBLIC LIBRARY) | STATUS: COMPLETED (10:15)</p>
+    </div>
+    <div class="nypd-section">
+        <h4>REESE'S RESOURCES (OFF-THE-BOOKS)</h4>
+        <!-- Reese的资源：一次性手机、改装车辆、隐蔽武器 -->
+        <p>VEHICLES ASSIGNED: 2 (BLACK FORD TAURUS, MOTORCYCLE) | UNREGISTERED</p>
+        <p>WEAPONRY: 9MM PISTOL (CONCEALED), KNIFE, TASER | LICENSE: NONE (CIA WAIVER)</p>
+        <p>ACCESS LEVEL: THE MACHINE (LEVEL 4 - FIELD OPERATIVE)</p>
+        <p>COMMUNICATIONS: BURNER PHONES (5 ROTATING) | ENCRYPTED: YES</p>
+    </div>
+</div>
+
+  <!-- 个人页核心容器 -->
+  <div class="profile-container">
+    <div class="profile-card">
+      <!-- 标题区 -->
+      <div class="profile-title">
+        <h1>JOHN REESE</h1>
+        <p>IDENTITY: TGT-001-12345 | RISK LEVEL: HIGH | LAST SEEN: MANHATTAN (5TH AVE)</p>
+      </div>
+
+      <!-- 上半部分：基础信息 + SYSTEM LOGS + 地图/CASE -->
+      <div class="profile-top-wrapper">
+        <!-- 基础信息 -->
+        <div class="profile-basic">
+          <div class="photo-box">
+            <img src="img/reese.jpg" alt="John Reese"> 
+          </div>
+          <div class="safety-level">
+            <p class="level-text">SAFETY LEVEL</p>
+            <p class="level-value">HIGH</p>
+          </div>
+          <div class="basic-info">
+            <p><strong>Full Name:</strong> John Reese (AKA: Harold Wren, John Rooney)</p>
+            <p><strong>DOB:</strong> 1969-09-17</p>
+            <p><strong>Address:</strong> No Fixed Address (Nomadic - NYC)</p>
+            <p><strong>Occupation:</strong> Former CIA Black Ops Operative (Unemployed Cover)</p>
+            <p><strong>Affiliation:</strong> The Machine, Harold Finch (Off-the-books)</p>
+            <p><strong>Contact:</strong> Burner Phone (917) 555-1234 (Rotated q4h)</p>
+          </div>
+        </div>
+
+        <!-- 右侧：SYSTEM LOGS + 地图/ACTIVE CASE 左右 -->
+        <div class="profile-right-wrapper">
+          <!-- SYSTEM LOGS 列 -->
+          <div class="profile-logs-column">
+            <div class="log-scroll">
+              <h3>SYSTEM LOGS</h3>
+              <div class="log-content">
+                <p><span class="log-time">04:15:02</span> - Surveillance: Awoke in abandoned warehouse (Brooklyn) | No activity detected</p>
+                <p><span class="log-time">05:00:18</span> - Acquired coffee/food (bodega, 3rd & Main) | Cash only, no ID used</p>
+                <p><span class="log-time">06:30:45</span> - Met with Finch (Public Library) | Exchanged target intel (OP#001)</p>
+                <p><span class="log-time">07:12:33</span> - Reconaissance: Target 08's residence (Upper East Side) | Planted surveillance</p>
+                <p><span class="log-time">08:05:19</span> - Avoided NYPD patrol (6th & 5th Ave) | No contact, low profile maintained</p>
+                <p><span class="log-time">09:18:22</span> - Vehicle check: Ford Taurus (garage, Queens) | Oil change, weapon inspection</p>
+                <p><span class="log-time">10:00:07</span> - Public phone call: Encrypted to Finch | Target 08 movement update</p>
+                <p><span class="log-time">10:45:18</span> - Followed target 08 to office (Wall St) | Detected 2 hostile surveillants</p>
+                <p><span class="log-time">11:20:22</span> - Physical intervention: Neutralized hostile (alley, Wall St) | No witnesses, no police report</p>
+                <p><span class="log-time">12:15:45</span> - Lunch with target 08 (cafe, 4th Ave) | Debriefed on threat awareness</p>
+                <p><span class="log-time">13:08:11</span> - Radio scan: NYPD 8th Precinct | No APB on Reese or intervention</p>
+                <p><span class="log-time">14:30:33</span> - Relocated target 08 to safe house (Brooklyn) | Evaded tail (corporate security)</p>
+                <p><span class="log-time">15:15:08</span> - Restocked supplies (hardware store, Brooklyn) | Tools, first aid, ammo</p>
+                <p><span class="log-time">16:00:12</span> - Surveillance: Safe house perimeter | No breaches detected</p>
+                <p><span class="log-time">17:22:45</span> - Burner phone disposal: 917 number (trash, Brooklyn) | Activated new number (347) 555-6789</p>
+                <p><span class="log-time">18:10:17</span> - Recon: Corporate HQ (target 08's employer) | Identified 3 additional hostiles</p>
+                <p><span class="log-time">19:05:52</span> - Met with Finch (subway station) | OP#001 update, new target pending</p>
+                <p><span class="log-time">20:00:09</span> - Surveillance: Safe house (remote) | Target 08 secure, no activity</p>
+                <p><span class="log-time">21:18:34</span> - Relocated to temporary hideout (Manhattan) | Rest, weapon cleaning</p>
+                <p><span class="log-time">22:45:15</span> - The Machine alert: New threat to target 08 (text to new burner)</p>
+                <p><span class="log-time">23:30:48</span> - Prepped for night watch (safe house) | Tactical position established</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 地图+ACTIVE CASE 列 -->
+          <div class="profile-map-case-column">
+            <!-- 地图 -->
+            <div class="map-box">
+              <img src="img/ny-map.png" alt="NYC Nomadic Map"> <!-- 保留地图图片，适配Reese无固定区域 -->
+              <div class="location-marker">
+                <div class="location-text">NOMADIC (5TH AVE)</div>
+              </div>
+            </div>
+
+            <!-- ACTIVE CASE -->
+            <div class="case-info">
+              <h3>ACTIVE CASE: 001-1234</h3>
+              <p class="case-item"><strong>Case Type:</strong> Protection Detail (The Machine Target)</p>
+              <p class="case-item"><strong>Target:</strong> Female (28), Corporate Whistleblower (Wall St)</p>
+              <p class="case-item"><strong>Threat:</strong> Corporate Security Hit Squad (Unregistered)</p>
+              <p class="case-item"><strong>Status:</strong> In Progress (Safe House - Brooklyn)</p>
+              <p class="case-item"><strong>Update:</strong> 22:45:00 - New threat detected (imminent breach)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- 底部滚动播报 -->
+    <div class="news-ticker">
+        <div class="ticker-wrapper">
+            <div class="ticker-content">
+                <span class="member-link" onclick="window.location.href='reese.html'">REESE: 5TH AVE, PROTECTING TARGET 08 | </span>
+                <span class="member-link" onclick="window.location.href='finch.html'">FINCH: PUBLIC LIBRARY, ANALYZING THREAT DATA | </span>
+                <span>ALERT: HIGH THREAT TARGET 01 DETECTED NEAR BROOKLYN BRIDGE | </span>
+                <span class="member-link" onclick="window.location.href='root.html'">ROOT: ACCESSING CORPORATE SECURITY CAMERAS - GRANTED | </span>
+                <span class="member-link" onclick="window.location.href='fusco.html'">FUSCO: 12TH PRECINCT, OBTAINING BACKGROUND ON TARGET 08 | </span>
+            </div>
+            <div class="ticker-content">
+                <span class="member-link" onclick="window.location.href='reese.html'">REESE: 5TH AVE, PROTECTING TARGET 08 | </span>
+                <span class="member-link" onclick="window.location.href='finch.html'">FINCH: PUBLIC LIBRARY, ANALYZING THREAT DATA | </span>
+                <span>ALERT: HIGH THREAT TARGET 01 DETECTED NEAR BROOKLYN BRIDGE | </span>
+                <span class="member-link" onclick="window.location.href='root.html'">ROOT: ACCESSING CORPORATE SECURITY CAMERAS - GRANTED | </span>
+                <span class="member-link" onclick="window.location.href='fusco.html'">FUSCO: 12TH PRECINCT, OBTAINING BACKGROUND ON TARGET 08 | </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 实时时间脚本 (完全保留原逻辑) -->
+    <script>
+        // 更新实时时间
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+            document.querySelector('.time').textContent = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Reese侧边栏hover交互 (保留原交互逻辑)
+        const nypdSidebar = document.getElementById('nypdSidebar');
+        nypdSidebar.addEventListener('mouseenter', () => {
+            nypdSidebar.style.transform = 'translateX(0)';
+        });
+        nypdSidebar.addEventListener('mouseleave', () => {
+            nypdSidebar.style.transform = 'translateX(-90%)';
+        });
+    </script>
+</body>
+</html>
