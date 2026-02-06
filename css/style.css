@@ -1,0 +1,982 @@
+/* 加载层全屏覆盖 */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 9999; /* 确保覆盖所有内容 */
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+}
+
+/* 代码雨Canvas全屏 */
+#codeRain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* 进度条容器（中间靠下） */
+.progress-container {
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  max-width: 600px;
+  height: 25px;
+  border: 2px solid rgb(255, 255, 255); /* 绿色边框 */
+  background: #000;
+  z-index: 100; /* 高于信息框的z-index，确保不被遮挡 */
+  pointer-events: auto; /* 确保进度条可交互（如需） */
+}
+
+.progress-bar {
+  height: 100%;
+  background: #fafafa;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffee00;
+  font-family: "Courier New", monospace; /* 像素字体 */
+  font-size: 14px;
+  font-weight: bold;
+}
+.info-box-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* 不遮挡进度条交互 */
+  z-index: 50; /* 低于进度条的z-index */
+}
+.info-box {
+  position: absolute;
+  width: 300px;
+  height: 120px;
+  background: #000;
+  border: 2px solid #fff;
+  color: #fff;
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  display: flex;
+  overflow: hidden;
+  opacity: 0.9;
+  animation: fadeIn 0.3s ease-out;
+  z-index: 50; /* 统一信息框z-index，低于进度条 */
+}
+/* ✨ 核心修改1：照片容器（相对定位，承载照片+虚线框） */
+.info-box .photo-wrapper {
+  width: 20%;
+  height: 100%;
+  position: relative; /* 作为虚线框的定位参考 */
+}
+/* 照片样式（去掉原有边框，仅保留基础布局） */
+.info-box .photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+/* ✨ 核心修改2：剧中同款虚线黄框（绝对定位+内缩） */
+.info-box .target-box {
+  /* 定位：照片内中上部（可调整top/left控制位置） */
+  position: absolute;
+  top: 10%; /* 中上部：距离照片顶部10% */
+  left: 10%; /* 距离照片左侧5% */
+  /* 尺寸：比照片小（可调整width/height控制大小） */
+  width: 80%; /* 占照片宽度的80% */
+  height: 60%; /* 占照片高度的60% */
+  /* 剧中虚线样式：黄色虚线+像素感 */
+  border: 2px dashed #FFD700; /* 金色虚线，2px粗细 */
+  box-sizing: border-box;
+  /* 可选：添加轻微发光，更贴近剧中效果 */
+  box-shadow: 0 0 3px #FFD700;
+  pointer-events: none; /* 不遮挡照片点击（如需） */
+}
+.info-box .details {
+  width: 70%;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.info-box .details p {
+  margin: 0;
+  line-height: 1.2;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 0.9; transform: scale(1); }
+}
+
+/* 全局重置+基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+body {
+  background: #000;
+  color: #d9d9d9;
+  overflow-x: hidden;
+  line-height: 1.4;
+}
+
+/* 全局背景 */
+.bg-base {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: -2;
+}
+
+.bg-circuit {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('../img/circuit-bg.png') repeat;
+  opacity: 0.15;
+  z-index: -1;
+}
+
+/* 顶部系统状态栏 */
+.system-status {
+  width: 100vw;
+  height: 30px;
+  background: #000;
+  border-bottom: 2px solid #d9d9d9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  font-size: 12px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.status-left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.status-right {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.back-btn {
+  background: #d9d9d9;
+  color: #000;
+  padding: 2px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* THE MACHINE 数据量滚动模块 */
+.data-ticker {
+  width: 100vw;
+  height: 25px;
+  background: #000;
+  border-bottom: 1px solid #d9d9d9;
+  position: fixed;
+  top: 30px;
+  left: 0;
+  z-index: 998;
+  overflow: hidden;
+}
+
+.data-ticker-wrapper {
+  display: flex;
+  animation: dataScroll 30s linear infinite;
+  white-space: nowrap;
+}
+
+.data-ticker-content {
+  flex: 0 0 auto;
+  padding: 3px 15px;
+  font-size: 11px;
+  color: #d9d9d9;
+}
+
+@keyframes dataScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* 首页核心分屏容器（左70% 右30%） */
+.screen-container {
+  display: flex;
+  width: 100vw;
+  height: calc(100vh - 85px); /* 状态栏30 + 数据滚动25 + 底部播报30 */
+  margin-top: 55px; /* 状态栏+数据滚动高度 */
+}
+
+/* 首页左侧70%：监控区+NYPD信息区 */
+.monitor-nypd-wrapper {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  border-right: 2px solid #d9d9d9;
+}
+
+/* 首页监控区（重构为37分：左30%照片跳转，右70%监控） */
+.monitor-area {
+  width: 100%;
+  height: 50%;
+  position: relative;
+  border-bottom: 2px solid #d9d9d9;
+  display: flex; /* 新增：37分布局 */
+}
+
+/* 监控区左侧40%：3*2个人照片跳转区 */
+.monitor-avatar-area {
+  width: 40%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3列 */
+  grid-template-rows: repeat(2, 1fr);    /* 2行 */
+  gap: 8px; /* 缩小间距适配布局 */
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.avatar-card {
+  border: 1px solid #00ffcc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  /* 缩小卡片尺寸 */
+  height: calc(100% - 4px);
+}
+
+.avatar-card:hover {
+  border-color: #f1f112;
+  transform: scale(1.02);
+}
+
+.avatar-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-card p {
+  text-align: center;
+  font-size: 12px;
+  padding: 3px 0;
+  background: #000;
+}
+
+/* 监控区右侧70%：视频+网格 */
+.monitor-video-area {
+  width: 60%;
+  height: 100%;
+  position: relative;
+}
+
+.monitor-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-backup {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff0000;
+  font-size: 14px;
+}
+
+/* 网格层（淡化稀疏） */
+.grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+  background-size: 60px 60px; /* 稀疏化 */
+  pointer-events: none;
+}
+
+/* 首页下半部分：NYPD信息区（地图固定+信息滚动） */
+.nypd-info-area {
+  width: 100%;
+  height: 50%;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  overflow: hidden; /* 父容器不滚动 */
+}
+
+/* NYPD地图容器（固定高度+不滚动，修复红点显示） */
+.nypd-map-container {
+  width: 40%;
+  height: 100%;
+  position: relative;
+  border: 1px solid #d9d9d9;
+  overflow: hidden; /* 地图不滚动 */
+}
+
+.nypd-map {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 地图红点标记（动态生成） */
+.map-marker {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #a20000;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  box-shadow: 0 0 3px #a20000; /* 增加红点可见性 */
+}
+
+/* NYPD数据面板（仅自身滚动） */
+.nypd-data-panel {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto; /* 仅信息面板滚动 */
+  padding-right: 5px;
+}
+
+.nypd-data-section {
+  border: 1px solid #d9d9d9;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+/* NYPD数据文本样式区分 */
+.nypd-data-section h4 {
+  color: #f1f112; /* 标题黄色 */
+  font-size: 13px;
+  font-weight: bold; /* 标题加粗 */
+  margin-bottom: 5px;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 3px;
+}
+
+.nypd-data-section p {
+  font-size: 11px;
+  margin: 3px 0;
+  line-height: 1.5; /* 增加行高 */
+}
+
+.nypd-label {
+  color: #ca951c; /* 标签青色 */
+  font-weight: bold;
+}
+
+.nypd-value {
+  color: #d9d9d9; /* 数值白色 */
+}
+
+.nypd-highrisk {
+  color: #ff0000; /* 高风险红色 */
+  font-weight: bold;
+}
+
+/* 首页右侧30%：TARGET DATABASE */
+.info-area {
+  width: 30%;
+  height: 100%;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.info-header {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.info-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.info-card {
+  border: 1.5px solid #d9d9d9;
+  padding: 10px;
+  border-radius: 3px;
+}
+
+.info-card h4 {
+  color: #f1f112;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.info-card p {
+  font-size: 11px;
+  margin: 2px 0;
+}
+
+.label {
+  color: #ca951c;
+  font-weight: bold;
+}
+
+.risk.low { color: #d9d9d9; }
+.risk.medium { color: #f1f112; }
+.risk.high { color: #ff0000; }
+
+/* 底部滚动播报 */
+.news-ticker {
+  width: 100vw;
+  height: 30px;
+  background: #000;
+  border-top: 2px solid #d9d9d9;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 998;
+  overflow: hidden;
+}
+
+.ticker-wrapper {
+  display: flex;
+  animation: tickerScroll 20s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-content {
+  flex: 0 0 auto;
+  padding: 5px 15px;
+  font-size: 12px;
+}
+
+.member-link {
+  color: #dfe302;
+  cursor: pointer;
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+/* 个人页核心样式（最终修复版：地图+case五五分，日志位置正确） */
+.profile-container {
+  width: 100%;
+  max-width: 1800px; /* 限制最大宽度，防止缩放混乱 */
+  margin: 55px auto 0; /* 居中+顶部间距 */
+  padding: 15px;
+  overflow-y: auto;
+  min-height: calc(100vh - 85px);
+}
+
+.profile-card {
+  width: 100%;
+  min-height: 100%;
+  border: 2px solid #d9d9d9;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.profile-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.profile-title h1 {
+  color: #f1f112;
+  font-size: 24px;
+}
+
+.profile-title p {
+  font-size: 12px;
+  color: #970000;
+}
+
+/* 个人页上半部分：基础信息 + 地图+案件（五五分） */
+/* 个人页核心样式（统一为：基础信息 + SYSTEM LOGS + 地图/ACTIVE CASE 左右排列） */
+.profile-container {
+  width: 100%;
+  max-width: 2000px; /* 限制最大宽度，防止缩放混乱 */
+  margin: 20px auto 0; /* 居中+顶部间距 */
+  padding: 20px;
+  overflow-y: auto;
+  min-height: calc(100vh - 85px);
+}
+
+.profile-card {
+  width: 100%;
+  min-height: 100%;
+  border: 2px solid #d9d9d9;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.profile-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.profile-title h1 {
+  color: #f1f112;
+  font-size: 24px;
+}
+
+.profile-title p {
+  font-size: 12px;
+  font-weight: bold;
+  color: #df3501
+  ;
+}
+/* 仅添加必要的过渡样式，保证更新时的视觉效果 */
+.fading {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+#locationMarker {
+    transition: all 0.5s ease;
+}
+/* 新增：固定核心容器高度，保证对齐 */
+.profile-top-wrapper {
+    display: flex;
+    justify-content: space-between;
+    height: 500px; /* 固定总高度，可根据设计调整 */
+}
+.profile-basic {
+    flex: 0 0 25%; /* 固定基础信息宽度 */
+    height: 100%;
+    overflow-y: auto; /* 内容超出时显示滚动条 */
+}
+.profile-right-wrapper {
+    flex: 0 0 75%; /* 固定右侧宽度 */
+    display: flex;
+    height: 100%;
+}
+.profile-logs-column {
+    flex: 0 0 30%; /* 固定日志列宽度 */
+    height: 100%;
+    overflow-y: auto; /* 日志超出时滚动 */
+}
+.profile-map-case-column {
+    flex: 0 0 42%; /* 固定地图+案件列宽度 */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.map-box {
+    flex: 0 0 60%; /* 固定地图高度占比 */
+    position: relative;
+}
+.case-info {
+    flex: 0 0 38%; /* 固定案件信息高度占比 */
+    overflow-y: auto; /* 内容超出时滚动 */
+}
+.log-scroll {
+    height: 100%;
+    overflow-y: auto;
+}
+/* 1. 地图随机红点样式 + 闪烁动画 */
+.map-marker {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff0000;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    box-shadow: 0 0 6px rgba(255, 0, 0, 0.8);
+    /* 闪烁动画：模拟案件实时触发感 */
+    animation: blink 1.5s ease-in-out infinite alternate;
+}
+@keyframes blink {
+    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* 2. TARGET DATABASE 滚动容器样式（确保固定高度，滚动生效） */
+#infoScroll {
+    height: calc(100% - 30px); /* 减去标题高度，确保不超出父容器 */
+    overflow: hidden; /* 隐藏溢出内容，仅显示滚动区域 */
+}
+
+/* 3. 数据更新过渡效果（避免数字跳变生硬） */
+.nypd-value, .nypd-highrisk {
+    transition: all 0.5s ease;
+}
+
+/* 修复原样式中地图控件的层级问题（避免遮挡红点） */
+.map-controls {
+    z-index: 20; /* 确保按钮在红点之上 */
+}
+
+/* 个人页上半部分：基础信息 + 右侧组合区（SYSTEM LOGS + 地图/案件） */
+.profile-top-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+}
+
+/* 基础信息（左侧固定宽度） */
+.profile-basic {
+  width: 300px; /* 固定宽度，避免缩放混乱 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.photo-box {
+  border: 2px solid #d9d9d9;
+  padding: 5px;
+}
+
+.photo-box img {
+  width: 120px;
+  height: 180px;
+  object-fit: cover;
+}
+
+.safety-level {
+  text-align: center;
+}
+
+.level-text {
+  font-size: 12px;
+  color: #feffff;
+}
+
+.level-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff0000;
+}
+
+.basic-info {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  padding: 10px;
+}
+
+.basic-info p {
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+/* 右侧核心：SYSTEM LOGS（左） + 地图/ACTIVE CASE（右） 左右排列 */
+.profile-right-wrapper {
+  flex: 1; /* 占剩余宽度 */
+  display: flex; /* 改为横向排列 */
+  gap: 15px;
+}
+
+/* SYSTEM LOGS 列（右侧左列，占40%宽度） */
+.profile-logs-column {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.log-scroll {
+  width: 100%;
+  border: 1px solid #f8f9f8;
+  padding: 10px;
+  max-height: 515px; /* 匹配地图+CASE的总高度 */
+  overflow-y: auto;
+  flex: 1; /* 占满列高度 */
+}
+
+.log-scroll h3 {
+  color: #f1f112;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.log-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.log-content p {
+  font-size: 11px;
+}
+
+.log-time {
+  color: #d9d9d9;
+  font-weight: bold;
+}
+
+/* 地图+ACTIVE CASE 列（右侧右列，占60%宽度） */
+.profile-map-case-column {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 地图盒子 */
+.map-box {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border: 2px solid #d9d9d9;
+}
+
+.map-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.location-marker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.location-text {
+  background: #000;
+  border: 1px solid #ff0000;
+  padding: 2px 5px;
+  font-size: 12px;
+  color: #ff0000;
+}
+
+/* ACTIVE CASE 盒子 */
+.case-info {
+  width: 100%;
+  border: 1px solid #d9d9d9;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1; /* 占满剩余高度 */
+}
+
+.case-info h3 {
+  color: #f1f112;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.case-item {
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+/* 个人页NYPD侧边栏（保留原有hover效果） */
+.nypd-sidebar {
+  position: fixed;
+  top: 55px;
+  left: 10px;
+  width: 300px;
+  height: calc(100vh - 100px);
+  background: #000;
+  border: 2px solid #d9d9d9;
+  padding: 15px;
+  z-index: 997;
+  overflow-y: auto;
+  transform: translateX(-100%); /* 默认隐藏，只露2% */
+  transition: transform 0.3s ease; /* 平滑过渡 */
+}
+
+.nypd-sidebar:hover {
+  transform: translateX(0);
+}
+
+.sidebar-title {
+  color: #f1f112;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.nypd-section {
+  border: 1px solid #d9d9d9;
+  padding: 10px;
+  margin-bottom: 12px;
+}
+
+.nypd-section h4 {
+  color: #f1f112;
+  font-size: 13px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed #d9d9d9;
+}
+
+.nypd-section p {
+  font-size: 12px;
+  margin: 6px 0;
+  line-height: 1.6;
+}
+
+/* 滚动条样式统一 */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #000;
+  border: 1px solid #d9d9d9;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #d9d9d9;
+}
+
+/* 响应式适配（小屏幕自动恢复纵向排列） */
+@media (max-width: 1200px) {
+  .screen-container {
+    flex-direction: column;
+  }
+  .monitor-nypd-wrapper, .info-area {
+    width: 100%;
+    height: 50%;
+  }
+  .monitor-nypd-wrapper {
+    border-right: none;
+    border-bottom: 2px solid #d9d9d9;
+  }
+  .profile-top-wrapper {
+    flex-direction: column;
+  }
+  .profile-basic {
+    width: 100%;
+  }
+  .profile-right-wrapper {
+    flex-direction: column;
+  }
+  .profile-logs-column, .profile-map-case-column {
+    width: 100%;
+  }
+  .log-scroll {
+    max-height: 200px;
+  }
+  .map-box {
+    height: 250px;
+  }
+/* 地图位置调整按钮样式 */
+.map-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.map-controls button {
+    background: #000;
+    border: 1px solid #d9d9d9;
+    color: #d9d9d9;
+    font-size: 10px;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.map-controls button:hover {
+    background: #d9d9d9;
+    color: #000;
+}
+/* 标记移动平滑过渡 */
+.location-marker {
+    transition: top 0.3s ease, left 0.3s ease;
+}
+/* 案件信息更新过渡 */
+.case-info {
+    transition: opacity 0.3s ease;
+}
+.case-info.fading {
+    opacity: 0.5;
+}
+
+}
+
+/* 首页角色照片样式（新增） */
+.character-photos {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  justify-content: center;
+  flex-wrap: wrap; /* 小屏幕自动换行 */
+}
+
+.character-photos a {
+  display: block;
+  border: 2px solid #d9d9d9;
+  transition: all 0.2s ease; /* hover动画 */
+}
+
+.character-photos a:hover {
+  border-color: #f1f112;
+  transform: scale(1.05); /* hover轻微放大 */
+}
+
+.character-photos img {
+  width: 150px; /* 统一照片尺寸 */
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+/* 1. 日志循环滚动必要样式：固定高度+滚动范围 */
+.log-content {
+    height: calc(100% - 30px); /* 适配父容器高度，不溢出 */
+    overflow-y: auto; /* 仅日志区域滚动 */
+    scroll-behavior: smooth; /* 滚动更丝滑 */
+}
+/* 2. 侧边栏随机数据过渡：避免更新生硬 */
+.sidebar-random {
+    transition: all 0.5s ease;
+    color: #ff0000; /* 红色突出随机数据，不影响排版 */
+}

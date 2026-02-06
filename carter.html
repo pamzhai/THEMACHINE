@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFIDENTIAL | JOSS CARTER</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        #logContent {
+            height: calc(100% - 30px);
+            overflow-y: auto;
+            scroll-behavior: auto !important; /* 关闭平滑滚动，避免卡顿 */
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            position: relative;
+        }
+        .sidebar-random {
+            transition: all 0.5s ease;
+        }
+        .fading {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #locationMarker {
+            transition: all 0.5s ease;
+        }
+        #logContent::-webkit-scrollbar {
+            display: none;
+        }
+        #logContent {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="profile-root">
+    <div class="bg-base"></div>
+    <div class="bg-circuit"></div>
+
+    <div class="system-status">
+        <div class="status-left">
+            <span class="back-btn" onclick="window.location.href='index.html'">BACK TO MONITOR</span>
+            <i class="fas fa-server"></i> THE MACHINE v4.8.2
+            <span><i class="fas fa-network-wired"></i> NODES: 2,147,483</span>
+            <span><i class="fas fa-microchip"></i> LOAD: 82%</span>
+        </div>
+        <div class="status-right">
+            <span><i class="fas fa-database"></i> PROCESS: 3.7TB/s</span>
+            <span class="time"></span>
+        </div>
+    </div>
+    <!-- 侧边栏：仅改Carter个人运营信息（符合NYPD侦探身份） -->
+    <div class="nypd-sidebar" id="nypdSidebar">
+        <div class="sidebar-title">NYPD DETECTIVE (ACTIVE)<br>[CARTER'S NYPD OPERATIONAL ZONE]</div>
+        <div class="nypd-section">
+            <h4>OPERATIONAL STATUS (CARTER'S UNIT)</h4>
+            <p>CARTER'S SHIFT: 08:00-16:00 | ON DUTY: YES (OVERTIME: <span class="sidebar-random" data-min="8" data-max="48">12</span>hrs)</p>
+            <p>PARTNER: FUSCO (STATUS: <span class="sidebar-random" data-list="ACTIVE,ON LEAVE,IN FIELD">ACTIVE</span>) | REESE (INFORMANT) | FINCH (CONTACT)</p>
+            <p>PATROL AREA: MANHATTAN (<span class="sidebar-random" data-list="12TH PRECINCT,FINANCIAL DISTRICT,MIDTOWN">12TH PRECINCT</span>) | BEAT: DETECTIVE (OFFICIAL)</p>
+            <p>DESK ASSIGNMENT: 12TH PRECINCT DETECTIVE DESK (NYPD OFFICIAL)</p>
+        </div>
+        <div class="nypd-section">
+            <h4>CARTER'S ACTIVE OPERATIONS</h4>
+            <p>OP#901: HR CORRUPTION INVESTIGATION | STATUS: <span class="sidebar-random" data-list="ONGOING,COMPLETED,PENDING">ONGOING</span> (NYPD OFFICIAL)</p>
+            <p>OP#902: WITNESS INTERROGATION (CASE#479) | STATUS: PENDING (EVIDENCE REVIEW)</p>
+            <p>OP#903: CRIME SCENE PROCESSING (7TH AVE) | STATUS: COMPLETED (REPORT FILED)</p>
+            <p>OP#904: PROTECT REESE (UNDERCOVER COVER) | STATUS: CLASSIFIED (TM ASSIGNMENT)</p>
+        </div>
+        <div class="nypd-section">
+            <h4>OPERATIONAL RESOURCES (CARTER ACCESS)</h4>
+            <p>VEHICLES ASSIGNED: <span class="sidebar-random" data-min="1" data-max="2">1</span> (NYPD PATROL CAR) | BACKUP: NYPD UNIFORMED UNITS</p>
+            <p>FORENSICS: NYPD FORENSICS TEAM (RESPONSE: 30 MIN)</p>
+            <p>DATABASE ACCESS: NYPD LEVEL 3 (CRIMINAL RECORDS, ARREST LOGS)</p>
+            <p>INFORMANT CONTACTS: <span class="sidebar-random" data-min="2" data-max="4">2</span> (FUSCO, REESE) (NYPD/UNDERCOVER)</p>
+        </div>
+    </div>
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- 标题区：仅改Carter个人标识 -->
+            <div class="profile-title">
+                <h1>JOSS CARTER</h1>
+                <p>IDENTITY: TGT-003-78901 | RISK LEVEL: HIGH | LAST SEEN: NYPD 12TH PRECINCT</p>
+            </div>
+            <div class="profile-top-wrapper">
+                <!-- 基础信息：仅改Carter个人数据（符合NYPD侦探设定） -->
+                <div class="profile-basic">
+                    <div class="photo-box">
+                        <img src="img/carter.jpg" alt="Joss Carter"> <!-- 替换为Carter图片路径 -->
+                    </div>
+                    <div class="safety-level">
+                        <p class="level-text">SAFETY LEVEL</p>
+                        <p class="level-value">HIGH</p>
+                    </div>
+                    <div class="basic-info">
+                        <p><strong>Full Name:</strong> Josslyn Carter</p>
+                        <p><strong>DOB:</strong> 1974-05-12</p>
+                        <p><strong>Address:</strong> 123 5th St, Manhattan, NYC (Permanent Residence)</p>
+                        <p><strong>Occupation:</strong> NYPD Detective (12th Precinct) | Vigilante | The Machine's Ally</p>
+                        <p><strong>Affiliation:</strong> NYPD | The Machine | Former US Army Military Police</p>
+                        <p><strong>Contact:</strong> (212) 555-7890 (NYPD Desk) | (212) 555-0123 (Burner Phone)</p>
+                    </div>
+                </div>
+                <div class="profile-logs-column">
+                    <div class="log-scroll">
+                        <h3>SYSTEM LOGS</h3>
+                        <div class="log-content" id="logContent">
+                            <!-- 第一份日志：Carter专属日常（符合NYPD侦探工作） -->
+                            <div class="log-copy log-copy-1">
+                                <p><span class="log-time">07:45:00</span> - Arrived at NYPD 12th Precinct, reviewed pending case files (HR corruption)</p>
+                                <p><span class="log-time">08:15:30</span> - Met with Fusco at desk: Discussed witness interview for CASE#479</p>
+                                <p><span class="log-time">09:00:12</span> - Interrogated witness (HR related): Obtained 7th Ave meeting details</p>
+                                <p><span class="log-time">10:20:45</span> - Filed witness statement in NYPD database (official record)</p>
+                                <p><span class="log-time">11:05:22</span> - Radio: Responded to 7th Ave crime scene (assault report)</p>
+                                <p><span class="log-time">12:15:08</span> - Lunch at bodega (8th & 34th St): Secret comms with Reese (HR update)</p>
+                                <p><span class="log-time">13:00:33</span> - Returned to precinct: Coordinated with forensics on 7th Ave evidence</p>
+                                <p><span class="log-time">14:10:19</span> - Reviewed REESE's undercover cover (NYPD file redaction)</p>
+                                <p><span class="log-time">15:05:57</span> - Called Finch: Shared HR detective names (encrypted call)</p>
+                                <p><span class="log-time">16:20:31</span> - Extended shift: Followed HR suspect (5th Ave & 42nd St)</p>
+                                <p><span class="log-time">17:35:14</span> - Met with Fusco: Handed over HR surveillance notes (official cover)</p>
+                                <p><span class="log-time">18:10:02</span> - Exited precinct, drove unmarked car (cover for TM surveillance)</p>
+                                <p><span class="log-time">19:05:48</span> - Monitored REESE's position (via NYPD cameras - 12th Ave)</p>
+                                <p><span class="log-time">20:20:15</span> - Reported HR activity to TM (via burner phone)</p>
+                                <p><span class="log-time">21:10:37</span> - Returned home: Secured case notes (HR related)</p>
+                                <p><span class="log-time">22:00:05</span> - Received TM alert: High-risk for REESE (initiated protection)</p>
+                                <p><span class="log-time">22:30:29</span> - Checked NYPD radio logs: No HR unit activity near REESE</p>
+                                <p><span class="log-time">23:15:11</span> - Sent Fusco backup request (for REESE's op zone)</p>
+                                <p><span class="log-time">00:05:44</span> - Final TM check-in: REESE secure, HR unit inactive</p>
+                                <p><span class="log-time">00:30:18</span> - Rested: Set alarm for next shift (07:00)</p>
+                                <p><span class="log-time">07:00:00</span> - Woke: Prepared for precinct shift (HR investigation focus)</p>
+                                <p><span class="log-time">07:30:22</span> - Left home: Drove to 12th Precinct (official duty)</p>
+                            </div>
+                            <!-- 第二份日志：与第一份完全一致（确保无缝滚动） -->
+                            <div class="log-copy log-copy-2">
+                                <p><span class="log-time">07:45:00</span> - Arrived at NYPD 12th Precinct, reviewed pending case files (HR corruption)</p>
+                                <p><span class="log-time">08:15:30</span> - Met with Fusco at desk: Discussed witness interview for CASE#479</p>
+                                <p><span class="log-time">09:00:12</span> - Interrogated witness (HR related): Obtained 7th Ave meeting details</p>
+                                <p><span class="log-time">10:20:45</span> - Filed witness statement in NYPD database (official record)</p>
+                                <p><span class="log-time">11:05:22</span> - Radio: Responded to 7th Ave crime scene (assault report)</p>
+                                <p><span class="log-time">12:15:08</span> - Lunch at bodega (8th & 34th St): Secret comms with Reese (HR update)</p>
+                                <p><span class="log-time">13:00:33</span> - Returned to precinct: Coordinated with forensics on 7th Ave evidence</p>
+                                <p><span class="log-time">14:10:19</span> - Reviewed REESE's undercover cover (NYPD file redaction)</p>
+                                <p><span class="log-time">15:05:57</span> - Called Finch: Shared HR detective names (encrypted call)</p>
+                                <p><span class="log-time">16:20:31</span> - Extended shift: Followed HR suspect (5th Ave & 42nd St)</p>
+                                <p><span class="log-time">17:35:14</span> - Met with Fusco: Handed over HR surveillance notes (official cover)</p>
+                                <p><span class="log-time">18:10:02</span> - Exited precinct, drove unmarked car (cover for TM surveillance)</p>
+                                <p><span class="log-time">19:05:48</span> - Monitored REESE's position (via NYPD cameras - 12th Ave)</p>
+                                <p><span class="log-time">20:20:15</span> - Reported HR activity to TM (via burner phone)</p>
+                                <p><span class="log-time">21:10:37</span> - Returned home: Secured case notes (HR related)</p>
+                                <p><span class="log-time">22:00:05</span> - Received TM alert: High-risk for REESE (initiated protection)</p>
+                                <p><span class="log-time">22:30:29</span> - Checked NYPD radio logs: No HR unit activity near REESE</p>
+                                <p><span class="log-time">23:15:11</span> - Sent Fusco backup request (for REESE's op zone)</p>
+                                <p><span class="log-time">00:05:44</span> - Final TM check-in: REESE secure, HR unit inactive</p>
+                                <p><span class="log-time">00:30:18</span> - Rested: Set alarm for next shift (07:00)</p>
+                                <p><span class="log-time">07:00:00</span> - Woke: Prepared for precinct shift (HR investigation focus)</p>
+                                <p><span class="log-time">07:30:22</span> - Left home: Drove to 12th Precinct (official duty)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 地图+案件区：仅改Carter专属内容（符合NYPD场景） -->
+                <div class="profile-map-case-column">
+                    <div class="map-box" id="interactiveMap">
+                        <img src="img/ny-map.png" alt="Carter's Operational Map">
+                        
+                        <div class="location-marker" id="locationMarker">
+                            <div class="location-text" id="locationText">12TH PRECINCT</div>
+                        </div>
+                    </div>
+                    <div class="case-info" id="activeCase">
+                        <h3>ACTIVE OP: 003-901</h3>
+                        <p class="case-item"><strong>Op Type:</strong> HR Corruption Investigation (NYPD Official)</p>
+                        <p class="case-item"><strong>Target Area:</strong> NYPD 12th Precinct, Manhattan</p>
+                        <p class="case-item"><strong>Evidence:</strong> Witness Testimony (HR Unit Involvement)</p>
+                        <p class="case-item"><strong>Status:</strong> Ongoing (Evidence Review)</p>
+                        <p class="case-item"><strong>Update:</strong> 15:05:00 - HR Detective Names Shared with Finch</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 底部播报：仅改Carter条目 -->
+    <div class="news-ticker">
+        <div class="ticker-wrapper">
+            <div class="ticker-content">
+                <span class="member-link" onclick="window.location.href='reese.html'">REESE: 7TH AVE, MONITORING HR TARGET | </span>
+                <span class="member-link" onclick="window.location.href='finch.html'">FINCH: PUBLIC LIBRARY, ANALYZING HR DATA | </span>
+                <span class="member-link" onclick="window.location.href='carter.html'">CARTER: 12TH PRECINCT, INTERROGATING HR WITNESS | </span>
+                <span class="member-link" onclick="window.location.href='root.html'">ROOT: HACKING NYPD CAMERAS - ACCESS GRANTED | </span>
+                <span class="member-link" onclick="window.location.href='fusco.html'">FUSCO: 12TH PRECINCT, COVERING TM EVIDENCE | </span>
+            </div>
+            <div class="ticker-content">
+                <span class="member-link" onclick="window.location.href='reese.html'">REESE: 7TH AVE, MONITORING HR TARGET | </span>
+                <span class="member-link" onclick="window.location.href='finch.html'">FINCH: PUBLIC LIBRARY, ANALYZING HR DATA | </span>
+                <span class="member-link" onclick="window.location.href='carter.html'">CARTER: 12TH PRECINCT, INTERROGATING HR WITNESS | </span>
+                <span class="member-link" onclick="window.location.href='root.html'">ROOT: HACKING NYPD CAMERAS - ACCESS GRANTED | </span>
+                <span class="member-link" onclick="window.location.href='fusco.html'">FUSCO: 12TH PRECINCT, COVERING TM EVIDENCE | </span>
+            </div>
+        </div>
+    </div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('en-US', { hour12: false });
+            document.querySelector('.time').textContent = timeStr;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+        const nypdSidebar = document.getElementById('nypdSidebar');
+        nypdSidebar.addEventListener('mouseenter', () => {
+            nypdSidebar.style.transform = 'translateX(0)';
+        });
+        nypdSidebar.addEventListener('mouseleave', () => {
+            nypdSidebar.style.transform = 'translateX(-98%)';
+        });
+        const map = document.getElementById('interactiveMap');
+        const marker = document.getElementById('locationMarker');
+        const markerText = document.getElementById('locationText');
+        const activeCase = document.getElementById('activeCase');
+        
+        // 仅改案件池为Carter专属（符合NYPD侦探任务）
+        const caseRandomPools = {
+            types: [
+                "HR Corruption Investigation (NYPD Official)",
+                "Witness Interrogation (Case File Review)",
+                "Crime Scene Processing (NYPD Forensics)",
+                "Reese Cover Protection (TM Related)",
+                "Fusco Coordination (Official Cover)",
+                "TM Alert Response (High-Risk Target)"
+            ],
+            evidences: [
+                "Witness Testimony (HR Unit)",
+                "NYPD Case Files (Redacted)",
+                "Forensics Report (7th Ave Crime Scene)",
+                "REESE Undercover NYPD File",
+                "HR Detective Surveillance Logs",
+                "TM High-Risk Alert Details"
+            ],
+            statuses: [
+                "Ongoing (Evidence Review)",
+                "Completed (Report Filed)",
+                "Pending (Witness Availability)",
+                "Standby (Waiting for Fusco Update)",
+                "Classified (TM Protection)",
+                "Active (Surveillance In Progress)"
+            ],
+            updates: [
+                "HR Detective Names Shared with Finch",
+                "Witness Interrogated, New Leads Obtained",
+                "Forensics Report Received, No DNA Match",
+                "Reese Position Confirmed, Secure",
+                "Fusco Backup Dispatched to 7th Ave",
+                "TM Alert Cleared, Target No Longer At Risk"
+            ]
+        };
+        function generateRandomCaseData(baseCase) {
+            const now = new Date();
+            const randomType = caseRandomPools.types[Math.floor(Math.random() * caseRandomPools.types.length)];
+            const randomEvidence = caseRandomPools.evidences[Math.floor(Math.random() * caseRandomPools.evidences.length)];
+            const randomStatus = caseRandomPools.statuses[Math.floor(Math.random() * caseRandomPools.statuses.length)];
+            const randomUpdate = caseRandomPools.updates[Math.floor(Math.random() * caseRandomPools.updates.length)];
+            const randomCaseId = `003-${Math.floor(Math.random() * 9999)}`;
+            const timeStamp = now.toLocaleTimeString('en-US', { hour12: false });
+            
+            return {
+                id: randomCaseId,
+                type: randomType,
+                target: baseCase.target,
+                evidence: randomEvidence,
+                status: randomStatus,
+                update: `${timeStamp} - ${randomUpdate}`
+            };
+        }
+        // 仅调整12th-precinct位置（符合Carter警局地点）
+        const areaCaseMap = {
+            '12th-precinct': {
+                location: { top: '40%', left: '55%', text: '12TH PRECINCT' },
+                baseCase: { target: 'NYPD 12th Precinct, Manhattan' }
+            },
+            'times-square': {
+                location: { top: '35%', left: '70%', text: 'TIMES SQUARE' },
+                baseCase: { target: 'Times Square Pedestrian Plaza, Manhattan' }
+            },
+            '7th-ave': {
+                location: { top: '65%', left: '40%', text: '7TH AVE (CRIME SCENE)' },
+                baseCase: { target: '7th Ave & 38th St, Manhattan' }
+            },
+            'random': {
+                location: { 
+                    top: `${Math.floor(Math.random() * 70) + 15}%`, 
+                    left: `${Math.floor(Math.random() * 70) + 15}%`, 
+                    text: 'RANDOM OP ZONE' 
+                },
+                baseCase: { target: `${Math.floor(Math.random() * 100)}th St & ${['5th','6th','7th','8th','9th'][Math.floor(Math.random()*5)]} Ave, Manhattan)` }
+            }
+        };
+        function getRandomCase() {
+            const randomTop = `${Math.floor(Math.random() * 70) + 15}%`;
+            const randomLeft = `${Math.floor(Math.random() * 70) + 15}%`;
+            const nyAddr = `${Math.floor(Math.random() * 100)}th St & ${['5th','6th','7th','8th','9th'][Math.floor(Math.random()*5)]} Ave, Manhattan)`;
+            return {
+                location: { 
+                    top: randomTop, 
+                    left: randomLeft, 
+                    text: `OP ZONE (${nyAddr.split(',')[0]})` 
+                },
+                case: generateRandomCaseData({ target: nyAddr })
+            };
+        }
+        function getAreaByClick(x, y) {
+            const mapRect = map.getBoundingClientRect();
+            const relativeX = (x - mapRect.left) / mapRect.width * 100;
+            const relativeY = (y - mapRect.top) / mapRect.height * 100;
+            
+            if (Math.abs(relativeY - 40) <= 5 && Math.abs(relativeX - 55) <= 5) return '12th-precinct';
+            if (Math.abs(relativeY - 35) <= 5 && Math.abs(relativeX - 70) <= 5) return 'times-square';
+            if (Math.abs(relativeY - 65) <= 5 && Math.abs(relativeX - 40) <= 5) return '7th-ave';
+            return 'custom';
+        }
+        function updateMapAndCase(areaKey) {
+            let data;
+            if (areaKey === 'random') {
+                data = getRandomCase();
+            } else if (areaCaseMap[areaKey]) {
+                const baseData = areaCaseMap[areaKey];
+                data = {
+                    location: baseData.location,
+                    case: generateRandomCaseData(baseData.baseCase)
+                };
+            } else {
+                data = areaKey;
+            }
+            
+            marker.style.top = data.location.top;
+            marker.style.left = data.location.left;
+            markerText.textContent = data.location.text;
+            
+            activeCase.classList.add('fading');
+            setTimeout(() => {
+                activeCase.innerHTML = `
+                    <h3>ACTIVE OP: ${data.case.id}</h3>
+                    <p class="case-item"><strong>Op Type:</strong> ${data.case.type}</p>
+                    <p class="case-item"><strong>Target Area:</strong> ${data.case.target}</p>
+                    <p class="case-item"><strong>Evidence:</strong> ${data.case.evidence}</p>
+                    <p class="case-item"><strong>Status:</strong> ${data.case.status}</p>
+                    <p class="case-item"><strong>Update:</strong> ${data.case.update}</p>
+                `;
+                activeCase.classList.remove('fading');
+            }, 300);
+        }
+        map.addEventListener('click', (e) => {
+            const areaKey = getAreaByClick(e.clientX, e.clientY);
+            if (areaKey === 'custom') {
+                const customData = getRandomCase();
+                updateMapAndCase(customData);
+            } else {
+                updateMapAndCase(areaKey);
+            }
+        });
+        const presetAreas = ['12th-precinct', 'times-square', '7th-ave', 'random'];
+        function autoUpdateMapAndCase() {
+            const randomArea = presetAreas[Math.floor(Math.random() * presetAreas.length)];
+            updateMapAndCase(randomArea);
+        }
+        const autoUpdateTimer = setInterval(autoUpdateMapAndCase, 30000);
+        updateMapAndCase('12th-precinct'); // 初始加载Carter常驻地点（12分局）
+        
+        // 日志滚动逻辑：完全保留Reese页代码，无修改
+        let logAnimationId;
+        const logContent = document.getElementById('logContent');
+        const logCopy1 = document.querySelector('.log-copy-1');
+        const scrollSpeed = 0.6; 
+        let logHeight = 0; 
+        window.addEventListener('load', () => {
+            logHeight = logCopy1.offsetHeight;
+            startLogScroll();
+        });
+        function scrollLogs() {
+            logContent.scrollTop += scrollSpeed;
+            if (logContent.scrollTop >= logHeight) {
+                logContent.scrollTop = 0;
+            }
+            logAnimationId = requestAnimationFrame(scrollLogs);
+        }
+        function startLogScroll() {
+            logAnimationId = requestAnimationFrame(scrollLogs);
+        }
+        logContent.addEventListener('mouseenter', () => {
+            cancelAnimationFrame(logAnimationId);
+        });
+        logContent.addEventListener('mouseleave', () => {
+            cancelAnimationFrame(logAnimationId);
+            startLogScroll();
+        });
+        
+        // 侧边栏随机更新：完全保留Reese页代码，无修改
+        function updateSidebarRandomData() {
+            const randomElements = document.querySelectorAll('.sidebar-random');
+            randomElements.forEach(el => {
+                if (el.dataset.min && el.dataset.max) {
+                    const min = Number(el.dataset.min);
+                    const max = Number(el.dataset.max);
+                    el.textContent = Math.floor(Math.random() * (max - min + 1)) + min;
+                } else if (el.dataset.list) {
+                    const list = el.dataset.list.split(',');
+                    el.textContent = list[Math.floor(Math.random() * list.length)];
+                }
+            });
+        }
+        updateSidebarRandomData();
+        setInterval(updateSidebarRandomData, 5000);
+    </script>
+</body>
+</html>
